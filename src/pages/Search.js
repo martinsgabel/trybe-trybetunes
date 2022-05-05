@@ -22,7 +22,7 @@ class Search extends React.Component {
   }
 
   characterCheck({ target }) {
-    const minimumNumber = 2;
+    const minimumNumber = 1;
     if (target.value.length > minimumNumber) {
       this.setState({
         buttonAvailability: false,
