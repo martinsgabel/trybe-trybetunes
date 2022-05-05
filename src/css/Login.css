@@ -1,6 +1,6 @@
 .login {
+  align-items: center;
   display: flex;
   flex: column wrap;
   justify-content: center;
-  align-items: center;
 }
