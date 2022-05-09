@@ -31,6 +31,7 @@ class Search extends React.Component {
     } if (target.value.length <= minimumNumber) {
       this.setState({
         buttonAvailability: true,
+        searchName: target.value,
       });
     }
   }
@@ -45,8 +46,9 @@ class Search extends React.Component {
 
     this.setState({
       searching: 3,
-      artist: name,
       albums: result,
+      artist: name,
+      searchName: '',
     });
   }
 
@@ -63,6 +65,7 @@ class Search extends React.Component {
               type="text"
               placeholder="Digite uma banda ou artista"
               id="input-search"
+              value={ searchName }
               onChange={ this.characterCheck }
             />
             <button
