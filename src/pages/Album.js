@@ -10,6 +10,8 @@ class Album extends React.Component {
 
     this.state = {
       songs: [],
+      artist: '',
+      album: '',
     };
   }
 
@@ -19,17 +21,25 @@ class Album extends React.Component {
 
     this.setState({
       songs: songsResult,
+      artist: songsResult[0].artistName,
+      album: songsResult[0].collectionName,
     });
   }
 
   render() {
-    const { songs } = this.state;
+    const { songs, artist, album } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-        {songs.map(({ amgArtistId, trackName, previewUrl }) => (
-          <div key={ amgArtistId }>
-            <MusicCard trackName={ trackName } previewUrl={ previewUrl } />
+        <h3 data-testid="artist-name">{ artist }</h3>
+        <h4 data-testid="album-name">{ album }</h4>
+        {songs.slice(1).map(({ trackId, trackName, previewUrl }) => (
+          <div key={ trackId }>
+            <MusicCard
+              trackId={ trackId }
+              trackName={ trackName }
+              previewUrl={ previewUrl }
+            />
           </div>
         ))}
       </div>
