@@ -33,12 +33,13 @@ class Album extends React.Component {
         <Header />
         <h3 data-testid="artist-name">{ artist }</h3>
         <h4 data-testid="album-name">{ album }</h4>
-        {songs.slice(1).map(({ trackId, trackName, previewUrl }) => (
-          <div key={ trackId }>
+        {songs.slice(1).map((song) => (
+          <div key={ song.trackId }>
             <MusicCard
-              trackId={ trackId }
-              trackName={ trackName }
-              previewUrl={ previewUrl }
+              trackId={ song.trackId }
+              trackName={ song.trackName }
+              previewUrl={ song.previewUrl }
+              song={ song }
             />
           </div>
         ))}
