@@ -50,12 +50,12 @@ class MusicCard extends React.Component {
             </audio>
             <label
               data-testid={ `checkbox-music-${trackId}` }
-              htmlFor="checkbox-id"
+              htmlFor={ trackId }
             >
               Favorita
               <input
                 type="checkbox"
-                id="checkbox-id"
+                id={ trackId }
                 defaultChecked={ checked }
                 onClick={ () => this.addToFav(song) }
               />
@@ -77,5 +77,9 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
 };
+
+/*
+Realizar a lógica do checked já do lado de fora, no album, e passar o valor checked por props/param
+*/
 
 export default MusicCard;
