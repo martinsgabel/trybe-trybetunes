@@ -16,12 +16,21 @@ class MusicCard extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { checked } = this.props;
+    console.log(checked);
+
+    this.setState({
+      checked,
+    });
+  }
+
   async addToFav(song) {
     this.setState({
       loading: true,
     });
 
-    const resultado = await addSong(song);
+    await addSong(song);
 
     const { addedSong } = this.state;
 
@@ -29,7 +38,7 @@ class MusicCard extends React.Component {
       addedSong: [...addedSong, song],
       loading: false,
       checked: true,
-    }, () => console.log(resultado));
+    });
   }
 
   render() {
@@ -76,10 +85,7 @@ MusicCard.propTypes = {
   trackId: PropTypes.number.isRequired,
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
 };
-
-/*
-Realizar a lógica do checked já do lado de fora, no album, e passar o valor checked por props/param
-*/
 
 export default MusicCard;

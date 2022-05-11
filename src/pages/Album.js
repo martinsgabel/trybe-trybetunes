@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
     super();
 
+    this.checkFavSongs = this.checkFavSongs.bind(this);
+
     this.state = {
       songs: [],
       artist: '',
       album: '',
+      favSongsFetched: [],
     };
   }
 
@@ -24,10 +28,20 @@ class Album extends React.Component {
       artist: songsResult[0].artistName,
       album: songsResult[0].collectionName,
     });
+
+    this.checkFavSongs();
+  }
+
+  async checkFavSongs() {
+    const favSongsFetched = await getFavoriteSongs();
+
+    this.setState({
+      favSongsFetched,
+    });
   }
 
   render() {
-    const { songs, artist, album } = this.state;
+    const { songs, artist, album, favSongsFetched } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
@@ -40,6 +54,9 @@ class Album extends React.Component {
               trackName={ song.trackName }
               previewUrl={ song.previewUrl }
               song={ song }
+              favSongsFetched={ favSongsFetched }
+              checked={ favSongsFetched.some((favsong) => (
+                favsong.trackId === song.trackId)) }
             />
           </div>
         ))}

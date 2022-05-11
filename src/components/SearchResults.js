@@ -43,7 +43,7 @@ class SearchResults extends React.Component {
 
 SearchResults.propTypes = {
   albums: PropTypes.arrayOf(PropTypes.shape({
-    collectionId: PropTypes.string.isRequired,
+    collectionId: PropTypes.number.isRequired,
     artworkUrl100: PropTypes.string.isRequired,
     collectionName: PropTypes.string.isRequired,
     artistName: PropTypes.string.isRequired,
