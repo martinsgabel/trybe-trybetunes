@@ -10,6 +10,7 @@ class Album extends React.Component {
     super();
 
     this.checkFavSongs = this.checkFavSongs.bind(this);
+    this.updateFavSongs = this.updateFavSongs.bind(this);
 
     this.state = {
       songs: [],
@@ -40,6 +41,14 @@ class Album extends React.Component {
     });
   }
 
+  updateFavSongs() {
+    const favSongsFetched = JSON.parse(localStorage.getItem('favorite_songs'));
+
+    this.setState({
+      favSongsFetched,
+    });
+  }
+
   render() {
     const { songs, artist, album, favSongsFetched } = this.state;
     return (
@@ -54,9 +63,9 @@ class Album extends React.Component {
               trackName={ song.trackName }
               previewUrl={ song.previewUrl }
               song={ song }
-              favSongsFetched={ favSongsFetched }
               checked={ favSongsFetched.some((favsong) => (
                 favsong.trackId === song.trackId)) }
+              updateFavSongs={ this.updateFavSongs }
             />
           </div>
         ))}

@@ -12,20 +12,20 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       addedSong: [],
-      checked: false,
     };
   }
 
-  componentDidMount() {
-    const { checked } = this.props;
-    console.log(checked);
+  // componentDidMount() {
+  //   const { checked } = this.props;
+  //   console.log(checked);
 
-    this.setState({
-      checked,
-    });
-  }
+  //   this.setState({
+  //     checked,
+  //   });
+  // }
 
   async addToFav(song) {
+    const { updateFavSongs } = this.props;
     this.setState({
       loading: true,
     });
@@ -37,13 +37,14 @@ class MusicCard extends React.Component {
     this.setState({
       addedSong: [...addedSong, song],
       loading: false,
-      checked: true,
     });
+
+    updateFavSongs();
   }
 
   render() {
-    const { song, trackId, trackName, previewUrl } = this.props;
-    const { loading, checked } = this.state;
+    const { song, trackId, trackName, previewUrl, checked } = this.props;
+    const { loading } = this.state;
     return (
       <div>
         {loading ? <Loading /> : (
@@ -65,8 +66,8 @@ class MusicCard extends React.Component {
               <input
                 type="checkbox"
                 id={ trackId }
-                defaultChecked={ checked }
-                onClick={ () => this.addToFav(song) }
+                checked={ checked }
+                onChange={ () => this.addToFav(song) }
               />
             </label>
           </div>
@@ -86,6 +87,7 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
+  updateFavSongs: PropTypes.func.isRequired,
 };
 
 export default MusicCard;
