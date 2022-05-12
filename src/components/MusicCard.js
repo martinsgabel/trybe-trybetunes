@@ -17,7 +17,6 @@ class MusicCard extends React.Component {
 
   async addToFav(song) {
     const { checked } = this.props;
-    console.log(checked);
     if (checked) {
       return this.removeFav(song);
     }
@@ -41,7 +40,6 @@ class MusicCard extends React.Component {
 
   removeFav(song) {
     const { updateFavSongs } = this.props;
-    console.log(song);
     this.setState({
       loading: true,
     }, async () => {
